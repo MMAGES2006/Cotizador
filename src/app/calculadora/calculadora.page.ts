@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-calculadora',
   templateUrl: './calculadora.page.html',
   styleUrls: ['./calculadora.page.scss'],
+  standalone: false,
+
+  
 })
 export class CalculadoraPage implements OnInit {
 
