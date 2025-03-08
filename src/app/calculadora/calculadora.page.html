@@ -10,9 +10,43 @@
     <ion-item routerLink="/home">Regresar al inicio</ion-item>
   </ion-list>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Calculadora</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <h2 id="h2"> Inserte los datos del viaje </h2> 
+  <input #UbiAInput type = "text" placeholder="Ubicacion A" class="input"/>
+  <br>
+  <br>
+  <input #UbiBInput type = "text" placeholder="Ubicacion B" class="input"/>
+  <br>
+  <br>
+  <input #Mat type = "text" placeholder="Producto" class="input"/>
+  <br> 
+  <br>
+  <input #Can type = "number" placeholder="Cantidad (toneladas)" class="input"/>
+  <br>
+  <br>
+
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click) = "addItem(UbiAInput.value, UbiBInput.value, Mat.value, Can.value); 
+  UbiAInput.value = ''; UbiBInput.value = ''; Mat.value = ''; Can.value ='';">
+    Agregar
+  </button>
+
+  <table border = "1" style = "margin-top: 20px; width: 100%; text-align: center;">
+    <thead>
+      <tr>
+        <th>Ubicacion A</th>
+        <th>Ubicacion B</th>
+        <th>Producto</th>
+        <th>Cantidad (toneladas)</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor = "let item of items">
+        <td>{{ item.ubiA }}</td>
+        <td>{{ item.ubiB }}</td>
+        <td>{{ item.product }}</td>
+        <td>{{ item.quan }}</td>
+      </tr>
+    </tbody>
+  </table>  
 </ion-content>
