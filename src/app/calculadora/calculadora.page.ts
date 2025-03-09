@@ -5,34 +5,32 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './calculadora.page.html',
   styleUrls: ['./calculadora.page.scss'],
   standalone: false,
-
-  
 })
 export class CalculadoraPage implements OnInit {
+  origen: string = '';
+  destino: string = '';
+  producto: string = '';
+  cantidadProducto: number = 0;
+  precioGasolina: number = 0;
+  distancia: number = 0;
+  rendimientoTanque: number = 0;
+  tarifaConductor: number = 0;
+  costoCasetas: number = 0;
+  costosAdicionales: number = 0;
 
-  items: {
-    id: number; ubiA: string; ubiB: string, product: string, quan: string, 
-  }[] = [];
-  nextId: number = 1;
+  costoGasolina: number = 0;
+  costoFinal: number = 0;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  calcularCosto() {
+    this.costoGasolina = (this.distancia / this.rendimientoTanque) * this.precioGasolina;
 
-  addItem(ubiA: string, ubiB: string, product: string, quan: string): void 
-  {
-    if (ubiA.trim() && ubiB.trim() && product.trim() && quan.trim()) {
-      this.items.push({
-        id: this.nextId++,
-        ubiA: ubiA.trim(),
-        ubiB: ubiB.trim(),
-        product: product.trim(),
-        quan: quan.trim(),
-      });
-    } else {
-      console.error('Todos los espacios deben ser llenados');
-    }
+    const costoTotalTransporte =
+      this.costoGasolina + this.tarifaConductor + this.costoCasetas + this.costosAdicionales;
+
+    this.costoFinal = costoTotalTransporte * this.cantidadProducto;
   }
 }

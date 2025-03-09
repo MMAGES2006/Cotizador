@@ -1,52 +1,77 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Calculadora</ion-title>
+    <ion-title>
+      Cotizador de Viaje
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
-  <ion-list>
-    <ion-item routerLink="/home">Regresar al inicio</ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label position="stacked">Punto de origen</ion-label>
+    <ion-input [(ngModel)]="origen" type="text" placeholder="Ingrese el punto de origen"></ion-input>
+  </ion-item>
 
-  
-  <h2 id="h2"> Inserte los datos del viaje </h2> 
-  <input #UbiAInput type = "text" placeholder="Ubicacion A" class="input"/>
-  <br>
-  <br>
-  <input #UbiBInput type = "text" placeholder="Ubicacion B" class="input"/>
-  <br>
-  <br>
-  <input #Mat type = "text" placeholder="Producto" class="input"/>
-  <br> 
-  <br>
-  <input #Can type = "number" placeholder="Cantidad (toneladas)" class="input"/>
-  <br>
-  <br>
+  <ion-item>
+    <ion-label position="stacked">Destino</ion-label>
+    <ion-input [(ngModel)]="destino" type="text" placeholder="Ingrese el destino"></ion-input>
+  </ion-item>
 
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click) = "addItem(UbiAInput.value, UbiBInput.value, Mat.value, Can.value); 
-  UbiAInput.value = ''; UbiBInput.value = ''; Mat.value = ''; Can.value ='';">
-    Agregar
-  </button>
+  <ion-item>
+    <ion-label position="stacked">Producto a transportar</ion-label>
+    <ion-input [(ngModel)]="producto" type="text" placeholder="Ingrese el producto"></ion-input>
+  </ion-item>
 
-  <table border = "1" style = "margin-top: 20px; width: 100%; text-align: center;">
-    <thead>
-      <tr>
-        <th>Ubicacion A</th>
-        <th>Ubicacion B</th>
-        <th>Producto</th>
-        <th>Cantidad (toneladas)</th>
-      </tr>
-    </thead>
+  <ion-item>
+    <ion-label position="stacked">Cantidad de producto (toneladas)</ion-label>
+    <ion-input [(ngModel)]="cantidadProducto" type="number"></ion-input>
+  </ion-item>
 
-    <tbody>
-      <tr *ngFor = "let item of items">
-        <td>{{ item.ubiA }}</td>
-        <td>{{ item.ubiB }}</td>
-        <td>{{ item.product }}</td>
-        <td>{{ item.quan }}</td>
-      </tr>
-    </tbody>
-  </table>  
+  <ion-item>
+    <ion-label position="stacked">Precio de gasolina</ion-label>
+    <ion-input [(ngModel)]="precioGasolina" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Distancia</ion-label>
+    <ion-input [(ngModel)]="distancia" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Rendimiento del tanque</ion-label>
+    <ion-input [(ngModel)]="rendimientoTanque" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Tarifa del conductor</ion-label>
+    <ion-input [(ngModel)]="tarifaConductor" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Costo casetas</ion-label>
+    <ion-input [(ngModel)]="costoCasetas" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Costos adicionales</ion-label>
+    <ion-input [(ngModel)]="costosAdicionales" type="number"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="calcularCosto()">Calcular Costo Total</ion-button>
+
+  <ion-card *ngIf="costoFinal !== null">
+    <ion-card-header>
+      <ion-card-title>Resultado</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Punto de Origen:</strong> {{ origen }}</p>
+      <p><strong>Destino:</strong> {{ destino }}</p>
+      <p><strong>Producto:</strong> {{ producto }}</p>      <p>Costo de Gasolina: {{ costoGasolina | currency }}</p>
+      <p>Costo del Conductor: {{ tarifaConductor | currency }}</p>
+      <p>Costo de Casetas: {{ costoCasetas | currency }}</p>
+      <p>Costos Adicionales: {{ costosAdicionales | currency }}</p>
+      <p><strong>Costo Total del Viaje: {{ costoFinal | currency }}</strong></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
